@@ -13,17 +13,19 @@
   ];
 </script>
 
-<PageLayout top="py-10">
-  <SectionHeader title="Calm and Relaxing Games" subtitle="Prove you're human (or at least stubborn). More mini‑games coming soon." />
-  <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+<div class="min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center px-4">
+  <SectionHeader title="Calm and Relaxing Games" subtitle="Prove you're human (or at least stubborn). More mini‑games coming soon." align="center" />
+  <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 justify-center">
     {#each games as g}
-      <Card disabled={g.status==='soon'}>
-        <h2 class="text-sm font-semibold mb-1">{g.title}</h2>
-        <p class="text-[0.65rem] leading-snug text-slate-400 mb-2">{g.desc}</p>
-        <Button full variant={g.status==='play' ? 'primary' : 'secondary'} size="sm" disabled={g.status!=='play'} on:click={() => g.path && navigate(g.path)}>
-          {g.status === 'play' ? 'Play' : 'Soon'}
-        </Button>
-      </Card>
+      <div class="w-60">
+        <Card disabled={g.status==='soon'}>
+          <h2 class="text-sm font-semibold mb-1">{g.title}</h2>
+          <p class="text-[0.65rem] leading-snug text-slate-400 mb-2">{g.desc}</p>
+          <Button full variant={g.status==='play' ? 'primary' : 'secondary'} size="sm" disabled={g.status!=='play'} on:click={() => g.path && navigate(g.path)}>
+            {g.status === 'play' ? 'Play' : 'Soon'}
+          </Button>
+        </Card>
+      </div>
     {/each}
   </div>
-</PageLayout>
+</div>
