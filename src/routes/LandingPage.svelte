@@ -32,7 +32,7 @@
   ];
 </script>
 
-<div class="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-4">
+<div class="relative flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-4">
   <SectionHeader
     title="Calm and Relaxing Games"
     subtitle="Prove you're human (or at least stubborn). More mini‑games coming soon."
@@ -58,3 +58,14 @@
     {/each}
   </div>
 </div>
+
+<!-- Author signature -->
+<a
+  href="https://radhey.dev"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="fixed bottom-3 right-3 select-none font-[Poppins] text-xs font-semibold tracking-wide text-emerald-300 transition-colors md:text-sm [text-shadow:0_0_6px_rgba(16,185,129,0.7),0_0_10px_rgba(16,185,129,0.4)] hover:text-emerald-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 rounded px-1"
+  aria-label="Visit radhey.dev"
+>
+  radhey.dev
+</a>
