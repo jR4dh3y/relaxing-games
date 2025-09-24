@@ -25,3 +25,23 @@ export interface IMosquito {
   nextPos(): Point;
   checkHit(cursor: Point, hitboxScale: number): boolean;
 }
+
+// Shared helper describing hitbox geometry (ellipse + head circle)
+export interface HitTestResult {
+  inside: boolean;
+  insideBody: boolean;
+  insideHead: boolean;
+}
+
+export function hitTestMosquito(cursor: Point, center: Point, hitboxScale: number): HitTestResult {
+  const a = 10 * hitboxScale; // body radii
+  const b = 5 * hitboxScale;
+  const rHead = 6 * hitboxScale; // head radius
+  const dx_b = cursor.x - center.x;
+  const dy_b = cursor.y - center.y;
+  const insideBody = (dx_b * dx_b) / (a * a) + (dy_b * dy_b) / (b * b) <= 1;
+  const dx_h = cursor.x - (center.x + 12 * hitboxScale);
+  const dy_h = cursor.y - center.y;
+  const insideHead = dx_h * dx_h + dy_h * dy_h <= rHead * rHead;
+  return { inside: insideBody || insideHead, insideBody, insideHead };
+}

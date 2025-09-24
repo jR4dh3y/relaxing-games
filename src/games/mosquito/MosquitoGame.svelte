@@ -10,6 +10,7 @@
     drawRacket,
     drawMosquitoEntity,
   } from "./lib/draw";
+  import { hitTestMosquito } from "./lib/types";
 
   const WIDTH = 800;
   const HEIGHT = 600;
@@ -33,7 +34,7 @@
   let lastMessageTime = 0;
   
   // Extra difficulty tuning
-  const REQUIRED_HIT_FRAMES = 0.5; // must keep cursor on target this many consecutive frames
+  const REQUIRED_HIT_FRAMES = 1; // must keep cursor on target this many consecutive frames
   let hitStreak = 0;
   const TAUNT_NEAR_MISS = ["So close!","Missed!","Too slow!","Whiff!","You blinked!","Almost.","Try harder.","Haha!",];
   const TAUNT_TIME = ["Getting tired?", "Still alive...", "Give up?"];
@@ -80,17 +81,8 @@
     
     // Hit detection with sustained requirement
     if (!killed) {
-      const { x, y } = mosquito.currentPos();
-      const a = 10 * hitboxScale;
-      const b = 5 * hitboxScale;
-      const rHead = 6 * hitboxScale;
-      const dx_b = cursor.x - x;
-      const dy_b = cursor.y - y;
-      const insideBody = (dx_b * dx_b) / (a * a) + (dy_b * dy_b) / (b * b) <= 1;
-      const dx_h = cursor.x - (x + 12 * hitboxScale);
-      const dy_h = cursor.y - y;
-      const insideHead = dx_h * dx_h + dy_h * dy_h <= rHead * rHead;
-      const inside = insideBody || insideHead;
+  const { x, y } = mosquito.currentPos();
+  const { inside } = hitTestMosquito(cursor, { x, y }, hitboxScale);
       if (inside) {
         hitStreak++;
       } else {
@@ -223,9 +215,9 @@
   <div class="relative mx-auto rounded border border-slate-700 bg-white p-2 shadow-md">
     <canvas bind:this={canvasEl} width={WIDTH} height={HEIGHT} class="block" style="display:block"></canvas>
   </div>
-  <p class="mx-auto max-w-sm text-[0.55rem] leading-snug text-slate-500">
-    Originally this was a Pygame 
-    <a
+    <p class="text-[0.55rem] leading-snug text-slate-500">
+      Originally this was a Pygame 
+      <a
       href="https://github.com/jR4dh3y/insects"
       target="_blank"
       rel="noopener noreferrer"

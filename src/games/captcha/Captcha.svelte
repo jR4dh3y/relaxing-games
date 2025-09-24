@@ -2,6 +2,8 @@
   import { onMount } from "svelte";
   export let imageSrc = "stop.jpg";
   export let instruction = "Select all tiles that contain the stop sign";
+  // Enable stronger visual contrast for tiles (bolder borders, clearer hover/focus)
+  export let highContrast = true;
 
   const STOP_SIGN_POLY = [
     { x: 590.0, y: 90.0 },
@@ -18,13 +20,13 @@
   const STOP_CENTER_Y = 245.0;
 
   let tiles = [];
-  const cols = 8;
-  const rows = 8;
+  const cols = 2;
+  const rows = 2;
   const imgWidth = 1024;
   const imgHeight = 900;
   const gridWidth = 1024;
   const gridHeight = 768;
-  const maxDepth = 2;
+  const maxDepth = 5;
   let clickCount = 0;
   let subdivisionCount = 0;
   let completed = false;
@@ -32,6 +34,32 @@
 
   function toggleDebug() {
     showDebug = !showDebug;
+  }
+  function tileClass(t) {
+    const intersects = tileIntersectsStopSign(t);
+    const base =
+      "absolute box-border cursor-pointer transition-colors duration-150 outline-none";
+    if (!highContrast) {
+      // fallback to previous styling (still improved from original)
+      return (
+        base +
+        " border-2 bg-black/5 " +
+        (showDebug
+          ? intersects
+            ? "border-emerald-400"
+            : "border-slate-200/70"
+          : "border-slate-500/70") +
+        " hover:border-emerald-300 hover:bg-emerald-400/5 focus-visible:ring-2 focus-visible:ring-emerald-400/70 focus-visible:border-emerald-400"
+      );
+    }
+    const border = showDebug
+      ? intersects
+        ? "border-emerald-300 bg-emerald-300/5"
+        : "border-slate-100/80 bg-slate-100/5"
+      : "border-slate-200/80 bg-slate-50/5";
+    const interactive =
+      " hover:border-emerald-300 hover:bg-emerald-300/10 focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:border-emerald-400";
+    return `${base} border-[3px] ${border}${intersects && !showDebug ? "" : ""}${interactive}`;
   }
   function reset() {
     initGrid();
@@ -187,11 +215,7 @@
     {/if}
     {#each tiles as t (t.x + "-" + t.y + "-" + t.depth)}
       <div
-        class="absolute box-border cursor-pointer border {showDebug
-          ? tileIntersectsStopSign(t)
-            ? 'border-emerald-400/70'
-            : 'border-slate-500/60'
-          : 'border-slate-600/40'} hover:border-emerald-400/70 focus-visible:border-emerald-400/70"
+        class={tileClass(t)}
         role="button"
         tabindex="0"
         aria-label="captcha tile"

@@ -6,7 +6,7 @@
   let route: RouteDef = routerState.route;
   function handleChange() {
     route = routerState.route;
-    document.title = route.title ? `${route.title} • Calm website` : "Relaxing";
+    document.title = `${route.title}`;
   }
   onMount(() => {
     startRouter(handleChange);

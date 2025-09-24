@@ -12,9 +12,9 @@ export interface RouteDef {
 }
 
 export const routes: RouteDef[] = [
-  { path: "/", component: Landing, title: "Challenges" },
+  { path: "/", component: Landing, title: "Home" },
   { path: "/captcha", component: CaptchaPage, title: "Completely Normal CAPTCHA" },
-  { path: "/mosquito", component: MosquitoPage, title: "Mosquito Hunt" },
+  { path: "/mosquito", component: MosquitoPage, title: "Machar Hunt" },
 ];
 
 export function matchRoute(path: string): RouteDef {
