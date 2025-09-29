@@ -2,8 +2,7 @@
   import { onMount } from "svelte";
   export let imageSrc = "stop.jpg";
   export let instruction = "Select all tiles that contain the stop sign";
-  // Enable stronger visual contrast for tiles (bolder borders, clearer hover/focus)
-  export let highContrast = true;
+  export let highContrast = false;
 
   const STOP_SIGN_POLY = [
     { x: 590.0, y: 90.0 },
