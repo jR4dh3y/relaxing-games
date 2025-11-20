@@ -4,6 +4,8 @@ type AnyComponent = any;
 import Landing from "./routes/LandingPage.svelte";
 import CaptchaPage from "./routes/CaptchaPage.svelte";
 import MosquitoPage from "./routes/MosquitoPage.svelte";
+import PrecisionPage from "./routes/PrecisionPage.svelte";
+import TyperPage from "./routes/TyperPage.svelte";
 
 export interface RouteDef {
   path: string;
@@ -15,6 +17,8 @@ export const routes: RouteDef[] = [
   { path: "/", component: Landing, title: "Home" },
   { path: "/captcha", component: CaptchaPage, title: "Completely Normal CAPTCHA" },
   { path: "/mosquito", component: MosquitoPage, title: "Machar Hunt" },
+  { path: "/precision", component: PrecisionPage, title: "Perfect Click Precision" },
+  { path: "/typer", component: TyperPage, title: "Chaos Typer" },
 ];
 
 export function matchRoute(path: string): RouteDef {

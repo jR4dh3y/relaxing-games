@@ -27,7 +27,14 @@
     {
       title: "Perfect Click Precision",
       desc: 'Hit the exact pixel 5 times in a row to prove your a "Pro Gamer".',
-      status: "soon",
+      path: "/precision",
+      status: "play",
+    },
+    {
+      title: "Chaos Typer",
+      desc: "Type a simple sentence. Should be easy, right?",
+      path: "/typer",
+      status: "play",
     },
   ];
 </script>
@@ -64,7 +71,7 @@
   href="https://radhey.dev"
   target="_blank"
   rel="noopener noreferrer"
-  class="fixed bottom-3 right-3 select-none font-[Poppins] text-xs font-semibold tracking-wide text-emerald-300 transition-colors md:text-sm [text-shadow:0_0_6px_rgba(16,185,129,0.7),0_0_10px_rgba(16,185,129,0.4)] hover:text-emerald-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 rounded px-1"
+  class="fixed bottom-3 right-3 select-none rounded px-1 font-[Poppins] text-xs font-semibold tracking-wide text-emerald-300 transition-colors [text-shadow:0_0_6px_rgba(16,185,129,0.7),0_0_10px_rgba(16,185,129,0.4)] hover:text-emerald-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 md:text-sm"
   aria-label="Visit radhey.dev"
 >
   radhey.dev
