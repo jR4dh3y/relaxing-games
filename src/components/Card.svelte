@@ -5,7 +5,8 @@
   export let as: string = "div";
   export let disabled = false;
   export let title: string | undefined = undefined;
-  const base = "flex flex-col rounded-lg border border-slate-700 bg-slate-800/50 text-slate-100";
+  const base =
+    "flex flex-col rounded-lg border border-slate-700 bg-slate-800/50 text-slate-100 h-full";
   const hover =
     "transition-colors " +
     (interactive ? "hover:border-emerald-500/60 hover:bg-slate-800/70 cursor-pointer" : "");

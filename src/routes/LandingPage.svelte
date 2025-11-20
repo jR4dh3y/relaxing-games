@@ -36,6 +36,18 @@
       path: "/typer",
       status: "play",
     },
+    {
+      title: "Troll Form",
+      desc: "A simple registration form. Just enter your phone number.",
+      path: "/troll",
+      status: "play",
+    },
+    {
+      title: "Cursor Maze",
+      desc: "Guide the red dot. Beware of input lag.",
+      path: "/maze",
+      status: "play",
+    },
   ];
 </script>
 
@@ -47,10 +59,10 @@
   />
   <div class="grid justify-center gap-4 sm:grid-cols-2 md:grid-cols-3">
     {#each games as g}
-      <div class="w-60">
+      <div class="h-full w-60">
         <Card disabled={g.status === "soon"}>
           <h2 class="mb-1 text-sm font-semibold">{g.title}</h2>
-          <p class="mb-2 text-[0.65rem] leading-snug text-slate-400">{g.desc}</p>
+          <p class="mb-2 flex-grow text-[0.65rem] leading-snug text-slate-400">{g.desc}</p>
           <Button
             full
             variant={g.status === "play" ? "primary" : "secondary"}

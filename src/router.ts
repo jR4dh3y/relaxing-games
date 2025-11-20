@@ -6,6 +6,8 @@ import CaptchaPage from "./routes/CaptchaPage.svelte";
 import MosquitoPage from "./routes/MosquitoPage.svelte";
 import PrecisionPage from "./routes/PrecisionPage.svelte";
 import TyperPage from "./routes/TyperPage.svelte";
+import TrollPage from "./routes/TrollPage.svelte";
+import MazePage from "./routes/MazePage.svelte";
 
 export interface RouteDef {
   path: string;
@@ -19,6 +21,8 @@ export const routes: RouteDef[] = [
   { path: "/mosquito", component: MosquitoPage, title: "Machar Hunt" },
   { path: "/precision", component: PrecisionPage, title: "Perfect Click Precision" },
   { path: "/typer", component: TyperPage, title: "Chaos Typer" },
+  { path: "/troll", component: TrollPage, title: "Troll Form" },
+  { path: "/maze", component: MazePage, title: "Cursor Maze" },
 ];
 
 export function matchRoute(path: string): RouteDef {

@@ -36,8 +36,7 @@
   }
   function tileClass(t) {
     const intersects = tileIntersectsStopSign(t);
-    const base =
-      "absolute box-border cursor-pointer transition-colors duration-150 outline-none";
+    const base = "absolute box-border cursor-pointer transition-colors duration-150 outline-none";
     if (!highContrast) {
       // fallback to previous styling (still improved from original)
       return (
@@ -182,7 +181,7 @@
   });
 </script>
 
-<div class="space-y-3 text-xs text-slate-200" bind:this={containerEl}>
+<div class="flex w-full flex-col items-center gap-6 text-xs text-slate-200" bind:this={containerEl}>
   <p class="text-sm font-semibold">{instruction}</p>
   <div class="flex flex-wrap items-center gap-4 text-[0.65rem] text-slate-400">
     <span>Clicks: {clickCount}</span>
@@ -191,25 +190,29 @@
   </div>
   <div
     class="relative mx-auto overflow-hidden border border-slate-700 bg-slate-800/40"
-    style="background-image: url('{imageSrc}'); background-size: cover; background-position: center; width: {displayWidth}px; height: {displayHeight}px;">
+    style="background-image: url('{imageSrc}'); background-size: cover; background-position: center; width: {displayWidth}px; height: {displayHeight}px;"
+  >
     {#if showDebug}
       <svg
         class="pointer-events-none absolute inset-0"
         width={displayWidth}
         height={displayHeight}
-        viewBox={`0 0 ${imgWidth} ${imgHeight}`}>
+        viewBox={`0 0 ${imgWidth} ${imgHeight}`}
+      >
         <polygon
           points={STOP_SIGN_POLY.map((p) => `${p.x},${p.y}`).join(" ")}
           stroke-dasharray="6 4"
           stroke-width="4"
-          class="fill-amber-500/10 stroke-amber-400/80"/>
+          class="fill-amber-500/10 stroke-amber-400/80"
+        />
         <text
           x={STOP_CENTER_X}
           y={STOP_CENTER_Y}
           text-anchor="middle"
           dominant-baseline="middle"
           font-size="32"
-          class="fill-amber-300 font-semibold">TARGET</text>
+          class="fill-amber-300 font-semibold">TARGET</text
+        >
       </svg>
     {/if}
     {#each tiles as t (t.x + "-" + t.y + "-" + t.depth)}
@@ -222,11 +225,13 @@
         on:keydown={(e) => (e.key === "Enter" || e.key === " ") && onTileClick(t)}
         style="left: {t.x * (displayWidth / imgWidth)}px; top: {t.y *
           (displayHeight / imgHeight)}px; width: {t.w * (displayWidth / imgWidth)}px; height: {t.h *
-          (displayHeight / imgHeight)}px;">
+          (displayHeight / imgHeight)}px;"
+      >
         {#if showDebug}
           <span
             class="pointer-events-none absolute left-0 top-0 m-[1px] rounded bg-black/60 px-0.5 font-mono text-[8px] leading-tight text-emerald-200"
-            >{Math.round(t.x)},{Math.round(t.y)} d{t.depth}</span>
+            >{Math.round(t.x)},{Math.round(t.y)} d{t.depth}</span
+          >
         {/if}
       </div>
     {/each}
@@ -234,7 +239,8 @@
       <div
         class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-slate-900/80 px-4 text-center"
         role="alert"
-        aria-live="assertive">
+        aria-live="assertive"
+      >
         <div class="text-sm font-semibold">Complete</div>
         <div class="text-[0.65rem] text-slate-400">
           All intersecting tiles reached depth {maxDepth}.
@@ -245,12 +251,14 @@
         <button
           class="mt-2 inline-flex items-center justify-center rounded bg-slate-600 px-3 py-1.5 text-[0.6rem] font-medium hover:bg-slate-500"
           type="button"
-          on:click={reset}>Restart</button>
+          on:click={reset}>Restart</button
+        >
       </div>
     {/if}
   </div>
   <button
     class="inline-flex items-center justify-center rounded bg-slate-600 px-3 py-1.5 text-[0.65rem] font-medium hover:bg-slate-500"
     type="button"
-    on:click={reset}>Reset</button>
+    on:click={reset}>Reset</button
+  >
 </div>

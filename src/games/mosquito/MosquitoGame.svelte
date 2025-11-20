@@ -32,11 +32,20 @@
   let flickerFrames = 0;
   let currentMessage = "";
   let lastMessageTime = 0;
-  
+
   // Extra difficulty tuning
   const REQUIRED_HIT_FRAMES = 1; // must keep cursor on target this many consecutive frames
   let hitStreak = 0;
-  const TAUNT_NEAR_MISS = ["So close!","Missed!","Too slow!","Whiff!","You blinked!","Almost.","Try harder.","Haha!",];
+  const TAUNT_NEAR_MISS = [
+    "So close!",
+    "Missed!",
+    "Too slow!",
+    "Whiff!",
+    "You blinked!",
+    "Almost.",
+    "Try harder.",
+    "Haha!",
+  ];
   const TAUNT_TIME = ["Getting tired?", "Still alive...", "Give up?"];
   const KILL_MESSAGES = ["Got it!", "Direct hit!", "You win!"];
   function showMessage(msg) {
@@ -51,38 +60,38 @@
     drawBackground(ctx, WIDTH, HEIGHT);
     const now = performance.now();
     const elapsed = (now - startTime) / 1000;
-    
+
     // Shrink hitbox faster & further
     if (!killed) hitboxScale = Math.max(0.25, 1 - elapsed / 25);
-    
+
     // Periodic taunts
     if (!killed && elapsed > 5 && Math.floor(elapsed) % 10 === 0 && now - lastMessageTime > 1800)
       showMessage(TAUNT_TIME[Math.floor(Math.random() * TAUNT_TIME.length)]);
-    
-      // Speed ramp harder
+
+    // Speed ramp harder
     speedMultiplier = Math.min(14, 1 + Math.floor(elapsed / 4) + Math.min(nearMissCount, 8));
-    
+
     // Flicker more over time
     const flickerProb = elapsed > 8 ? 0.03 : 0.015;
     if (!killed && flickerFrames <= 0 && elapsed > 3 && Math.random() < flickerProb)
       flickerFrames = (elapsed > 8 ? 30 : 15) + Math.floor(Math.random() * (elapsed > 8 ? 20 : 15));
     if (flickerFrames > 0) flickerFrames--;
-    
+
     // Advance along path
-    for(let s=0;s<speedMultiplier;s++){ 
-      mosquito.advance(); 
+    for (let s = 0; s < speedMultiplier; s++) {
+      mosquito.advance();
     }
-    
+
     // Occasional warp (evasive)
     if (!killed && elapsed > 10 && Math.random() < 0.01) {
       mosquito.idx =
         (mosquito.idx + 80 + Math.floor(Math.random() * 70)) % (mosquito.path.length - 1);
     }
-    
+
     // Hit detection with sustained requirement
     if (!killed) {
-  const { x, y } = mosquito.currentPos();
-  const { inside } = hitTestMosquito(cursor, { x, y }, hitboxScale);
+      const { x, y } = mosquito.currentPos();
+      const { inside } = hitTestMosquito(cursor, { x, y }, hitboxScale);
       if (inside) {
         hitStreak++;
       } else {
@@ -201,11 +210,12 @@
   });
 </script>
 
-<div class="space-y-3 text-xs text-slate-200">
+<div class="flex w-full flex-col items-center gap-6 text-xs text-slate-200">
   <div class="flex items-center gap-3">
     <button
       class="rounded bg-slate-600 px-3 py-1.5 text-[0.65rem] font-medium hover:bg-slate-500"
-      on:click={restart}>Restart</button>
+      on:click={restart}>Restart</button
+    >
     {#if killed}
       <span class="text-[0.6rem] text-emerald-400">Mosquito Eliminated</span>
     {:else}
@@ -213,15 +223,17 @@
     {/if}
   </div>
   <div class="relative mx-auto rounded border border-slate-700 bg-white p-2 shadow-md">
-    <canvas bind:this={canvasEl} width={WIDTH} height={HEIGHT} class="block" style="display:block"></canvas>
+    <canvas bind:this={canvasEl} width={WIDTH} height={HEIGHT} class="block" style="display:block"
+    ></canvas>
   </div>
-    <p class="text-[0.55rem] leading-snug text-slate-500">
-      Originally this was a Pygame 
-      <a
+  <p class="text-[0.55rem] leading-snug text-slate-500">
+    Originally this was a Pygame
+    <a
       href="https://github.com/jR4dh3y/insects"
       target="_blank"
       rel="noopener noreferrer"
-      class="text-sky-500 underline hover:text-sky-400">prototype
+      class="text-sky-500 underline hover:text-sky-400"
+      >prototype
     </a>, then ported by gpt-5 into this. Why I had made the original was a long story.
   </p>
 </div>
