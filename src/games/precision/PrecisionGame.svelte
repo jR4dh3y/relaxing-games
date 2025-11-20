@@ -20,7 +20,7 @@
   function handleClick(e: MouseEvent) {
     // Stop propagation to prevent the background click from triggering a miss
     e.stopPropagation();
-    
+
     score++;
     if (score >= 5) {
       won = true;
@@ -50,13 +50,13 @@
   });
 </script>
 
-<div class="flex flex-col items-center gap-4">
+<div class="flex flex-col items-center gap-6">
   <p class="text-sm text-slate-300">{message}</p>
-  
+
   <!-- Game Area -->
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <div 
+  <div
     bind:this={gameArea}
     class="relative h-64 w-full max-w-md cursor-crosshair rounded border border-slate-700 bg-slate-900 shadow-inner"
     on:click={handleMiss}
